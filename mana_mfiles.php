@@ -72,21 +72,21 @@ if(!empty($_FILES) && $_FILES['xfloor']['error']==0){
     <?php
         $sql="SELECT * FROM mfiles";
         $rows=$pdo->query($sql)->fetchAll();
-        foreach ($rows as $key=>$value) {  
+        foreach ($rows as $mfiles) {  
      
             
     ?>
     <tr>
-        <td><?=$value['id'];?></td>
-        <td><?=$value['name'];?></td>
-        <td><?=$value['type'];?></td>
-        <td><img src="<?=$value['path'];?>" style="width:50px;height:50px;"></td>
-        <td><?=$value['path'];?></td>
-        <td><?=$value['notes'];?></td>
-        <td><?=$value['create-time'];?></td>
+        <td><?=$mfiles['id'];?></td>
+        <td><?=$mfiles['name'];?></td>
+        <td><?=$mfiles['type'];?></td>
+        <td><img src="<?=$mfiles['path'];?>" style="width:50px;height:50px;"></td>
+        <td><?=$mfiles['path'];?></td>
+        <td><?=$mfiles['notes'];?></td>
+        <td><?=$mfiles['create-time'];?></td>
         <td>
-            <a href="edit_mfiles.php?id=<?=$value['id'];?>">更新檔案</a>
-            <a href="del_mfiles.php?id=<?=$value['id'];?>">刪除檔案</a>
+            <a href="edit_mfiles.php?id=<?=$mfiles['id'];?>">更新檔案</a>
+            <a href="del_mfiles.php?id=<?=$mfiles['id'];?>">刪除檔案</a>
         
         </td>
     </tr>
