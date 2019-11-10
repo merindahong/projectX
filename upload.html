@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ProjectX 檔案管理</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    a{
+        display: inline-block;
+        border: 1px solid #ccc;
+        padding: 5px 15px;
+        border-radius: 20px;
+        box-shadow: 1px 1px 3px #ccc;
+    }
+    
+    </style>
+</head>
+<body>
+<h1 class="header">上傳檔案</h1>
+<form action="mana_mfiles.php" method="post" enctype="multipart/form-data">
+  檔案：<input type="file" name="xfloor" ><br><br>
+  說明：<input type="text" name="notes" ><br>
+  <!-- 注意這個form欄位是text，是用post抓取和暫存 -->
+  <input type="submit" value="上傳">
+</form>
+
+
+</body>
+</html>

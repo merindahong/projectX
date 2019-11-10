@@ -6,29 +6,37 @@ if(!empty($_FILES) && $_FILES['xfloor']['error']==0){
     $theNotes=$_POST['notes'];
     $theType=$_FILES['xfloor']['type'];
     $filename=$_FILES['xfloor']['name'];
-    $thePath="./wh_xfiles/". $filename;
-    // $thePath="./upload/" . $filename;
+    $thePath="./house/". $filename;  
+
     $updateTime=date("Y-m-d H:i:s");
-    $theId=$_POST['id'];
+    $theID=$_POST['id'];
     move_uploaded_file($_FILES['xfloor']['tmp_name'] , $thePath );
     //刪除原本的檔案
-    $sql="SELECT * FROM xfiles WHERE id='$theId'";
+    $sql="SELECT * FROM mfiles WHERE id='$theID'";
     $origin=$pdo->query($sql)->fetch();
     $origin_file=$origin['path'];
     unlink($origin_file);
     //更新資料
-    $sql="UPDATE xfiles SET NAME='$filename',type='$theType',update-time='$updateTime',path='$thePath', notes='$theNotes' WHERE id='$theId'";
+    $sql="UPDATE mfiles SET=
+    type='$theType',update-time='$updateTime',
+    path='$thePath', notes='$theNotes' WHERE id='$theID'";
+
+// $sql="UPDATE mfiles SET NAME=
+// '$filename',type='$theType',update-time='$updateTime',
+// path='$thePath', notes='$theNotes' WHERE id='$theId'";
+
+
     $result=$pdo->exec($sql);
     if($result==1){
         echo "更新成功";
-        header("location:mana_xfiles.php");
+        header("location:mana_mfiles.php");
     }else{
         echo "DB有誤";
     }
 }
-$id=$_GET['id'];
-$sql="SELECT * FROM xfiles WHERE id='$id'";
-// as: http://localhost/MyWorkatSchool/Merindas/projectX/edit_xfiles.php?id=0
+$gid=$_GET["id"];
+$sql="SELECT * FROM mfiles WHERE id='$gid'";
+// as: http://localhost/MyWorkatSchool/Merindas/projectX/edit_mfiles.php?id=0
 // URL尾端可發現有序號為0
 $data=$pdo->query($sql)->fetch();
 ?>
@@ -41,7 +49,9 @@ td{
   border:1px solid #ccc;
 }
 </style>
-<form action="edit_xfiles.php" method="post" enctype="multipart/form-data">
+<form action="edit_mfiles.php" method="post" enctype="multipart/form-data">
+
+
 <table>
     <tr>
         <td colspan="2">

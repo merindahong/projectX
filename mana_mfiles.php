@@ -13,11 +13,11 @@ if(!empty($_FILES) && $_FILES['xfloor']['error']==0){
     
     $theType=$_FILES['xfloor']['type'];
     $file=$_FILES['xfloor']['name'];
-    $thePath="./wh_xfiles/" . $file;   
+    $thePath="./house/" . $file;   
     // oriName= original file name 
     
     move_uploaded_file($_FILES['xfloor']['tmp_name'] , $thePath);
-    $sql="INSERT INTO xfiles (`name`,`type`,`path`,`notes`) values('$file','$theType','$thePath','$theNotes')";
+    $sql="INSERT INTO mfiles (`name`,`type`,`path`,`notes`) values('$file','$theType','$thePath','$theNotes')";
     $result=$pdo->exec($sql);
     if($result==1){
         echo "上傳成功";
@@ -48,7 +48,7 @@ if(!empty($_FILES) && $_FILES['xfloor']['error']==0){
 <body>
 <h1 class="header">ProjectX 檔案管理</h1>
 <!----建立上傳檔案表單及相關的檔案資訊存入資料表機制----->
-<form action="mana_xfiles.php" method="post" enctype="multipart/form-data">
+<form action="mana_mfiles.php" method="post" enctype="multipart/form-data">
   檔案：<input type="file" name="xfloor" ><br><br>
   說明：<input type="text" name="notes" ><br>
   <!-- 注意這個form欄位是text，是用post抓取和暫存 -->
@@ -70,24 +70,23 @@ if(!empty($_FILES) && $_FILES['xfloor']['error']==0){
     </tr>
 
     <?php
-        $sql="SELECT * FROM xfiles";
+        $sql="SELECT * FROM mfiles";
         $rows=$pdo->query($sql)->fetchAll();
-        foreach ($rows as $key => $apple) {  
-            // rows去拿pdo去query(sql)抓取的所有資料 fetchAll()為陣列
-            // foreach () {} 迴圈設為 rows的陣列是 索引 對應 值
+        foreach ($rows as $key=>$value) {  
+     
             
     ?>
     <tr>
-        <td><?=$apple['id'];?></td>
-        <td><?=$apple['name'];?></td>
-        <td><?=$apple['type'];?></td>
-        <td><img src="<?=$apple['path'];?>" style="width:50px;height:50px;"></td>
-        <td><?=$apple['path'];?></td>
-        <td><?=$apple['notes'];?></td>
-        <td><?=$apple['create-time'];?></td>
+        <td><?=$value['id'];?></td>
+        <td><?=$value['name'];?></td>
+        <td><?=$value['type'];?></td>
+        <td><img src="<?=$value['path'];?>" style="width:50px;height:50px;"></td>
+        <td><?=$value['path'];?></td>
+        <td><?=$value['notes'];?></td>
+        <td><?=$value['create-time'];?></td>
         <td>
-            <a href="edit_xfiles.php?id=<?=$apple['id'];?>">更新檔案</a>
-            <a href="del_xfiles.php?id=<?=$apple['id'];?>">刪除檔案</a>
+            <a href="edit_mfiles.php?id=<?=$value['id'];?>">更新檔案</a>
+            <a href="del_mfiles.php?id=<?=$value['id'];?>">刪除檔案</a>
         
         </td>
     </tr>
