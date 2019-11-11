@@ -18,6 +18,9 @@ if(!empty($_FILES) && $_FILES['xfloor']['error']==0){
     
     move_uploaded_file($_FILES['xfloor']['tmp_name'] , $thePath);
     $sql="INSERT INTO mfiles (`name`,`type`,`path`,`notes`) values('$file','$theType','$thePath','$theNotes')";
+    echo $sql;
+    // MySQL的id要設A...I 自動增加 auto increasement
+
     $result=$pdo->exec($sql);
     if($result==1){
         echo "上傳成功";

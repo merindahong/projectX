@@ -17,9 +17,11 @@ if(!empty($_FILES) && $_FILES['xfloor']['error']==0){
     $origin_file=$origin['path'];
     unlink($origin_file);
     //更新資料
-    $sql="UPDATE mfiles SET=
+    $sql="UPDATE mfiles SET
     type='$theType',update-time='$updateTime',
     path='$thePath', notes='$theNotes' WHERE id='$theID'";
+    echo $sql;
+    // SET後面不要等於符號，印出來到MySQL去查
 
 // $sql="UPDATE mfiles SET NAME=
 // '$filename',type='$theType',update-time='$updateTime',
